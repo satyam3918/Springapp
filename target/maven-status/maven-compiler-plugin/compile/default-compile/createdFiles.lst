@@ -1,0 +1,4 @@
+com\springboot\demo\model\JournalEntry.class
+com\springboot\demo\dao\JournalEntryRepository.class
+com\springboot\demo\controller\JournalEntryController.class
+com\springboot\demo\SpringBootJournalAppApplication.class
