@@ -1,6 +1,7 @@
 package com.springboot.demo.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +13,7 @@ public class JournalEntry {
 	private int taskId;
 	private String taskName;
 	private String taskDescription;
-	private String taskDate;
+	private LocalDate taskDate;
 	private String createdBy;
 	private String updatedBy;
 	private LocalDateTime createdTs;
@@ -67,11 +68,11 @@ public class JournalEntry {
 		this.taskDescription = taskDescription;
 	}
 
-	public String getTaskDate() {
+	public LocalDate getTaskDate() {
 		return taskDate;
 	}
 
-	public void setTaskDate(String taskDate) {
+	public void setTaskDate(LocalDate taskDate) {
 		this.taskDate = taskDate;
 	}
 
