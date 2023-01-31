@@ -3,20 +3,22 @@ package com.springboot.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetCurrentMonthEntryResponse {
+public class GetMonthEntryResponse {
 
     private boolean success;
 
     private String errorMessage;
 
-    private List<JournalEntry> currentmonthdata = new ArrayList<JournalEntry>();
+    private List<Tasks> monthdata = new ArrayList<Tasks>(
 
-    public List<JournalEntry> getCurrentmonthdata() {
-        return currentmonthdata;
+    );
+
+    public List<Tasks> getMonthData() {
+        return monthdata;
     }
 
-    public void setCurrentmonthdata(List<JournalEntry> currentmonthdata) {
-        this.currentmonthdata = currentmonthdata;
+    public void setmonthdata(List<Tasks> monthdata) {
+        this.monthdata = monthdata;
     }
 
     public boolean isSuccess() {

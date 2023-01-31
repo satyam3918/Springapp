@@ -1,15 +1,18 @@
 package com.springboot.demo.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 
-import com.springboot.demo.model.GetCurrentMonthEntryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.springboot.demo.dao.JournalEntryRepo;
 import com.springboot.demo.model.CreateJournalEntryRequest;
-import com.springboot.demo.model.JournalEntry;
+import com.springboot.demo.model.GetMonthEntryResponse;
 import com.springboot.demo.model.JournalEntryResponse;
+import com.springboot.demo.model.Tasks;
 
 @Component
 public class JournalEntryServiceImpl implements JournalEntryService{
@@ -19,9 +22,9 @@ public class JournalEntryServiceImpl implements JournalEntryService{
 
     @Override
     public JournalEntryResponse addJournalEntry(final CreateJournalEntryRequest createJournalEntryRequest) {
-        JournalEntry entry = new JournalEntry();
+        Tasks entry = new Tasks();
         LocalDateTime now = LocalDateTime.now();
-        JournalEntry response = new JournalEntry();
+        Tasks response = new Tasks();
         JournalEntryResponse journalEntryResponse = new JournalEntryResponse();
         entry.setCreatedBy(createJournalEntryRequest.getCreatedBy());
         entry.setTaskDate(createJournalEntryRequest.getTaskDate());
@@ -43,19 +46,53 @@ public class JournalEntryServiceImpl implements JournalEntryService{
     }
 
     @Override
-    public GetCurrentMonthEntryResponse getAllEntries() {
-        GetCurrentMonthEntryResponse getCurrentMonthEntryResponse = new GetCurrentMonthEntryResponse();
+    public GetMonthEntryResponse getAllCurrentEntriesWithName(final String taskName) {
+        GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
         try {
-            getCurrentMonthEntryResponse.getCurrentmonthdata().addAll(repo.getCurrentMonthEntries());
-            getCurrentMonthEntryResponse.setSuccess(true);
+            getMonthEntryResponse.getMonthData().addAll(repo.getAllCurrentEntriesWithName(taskName));
+            getMonthEntryResponse.setSuccess(true);
         } catch (final Exception e) {
-            getCurrentMonthEntryResponse.setSuccess(false);
-            getCurrentMonthEntryResponse.setErrorMessage("Error occured in "+e.getMessage());
-            return getCurrentMonthEntryResponse;
+            getMonthEntryResponse.setSuccess(false);
+            getMonthEntryResponse.setErrorMessage("Error occured in "+e.getMessage());
+            return getMonthEntryResponse;
         }
 
-        return getCurrentMonthEntryResponse;
-    }
+        return getMonthEntryResponse;
     }
 
+    @Override
+    public GetMonthEntryResponse getAllMonthEntries(final String monthName) {
+        GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
+        try {
+            int month,year;
+            if(monthName==null){
+                LocalDate now = LocalDate.now();
+                month=now.getMonthValue();
+                year=now.getYear();
+            }
+            else{
+                // String monthStr = monthName.split("-")[0];
+                // String yearStr = monthName.split("-")[1];
+                // month=1;
+                // year=2023;
+                final String monthStr = monthName.substring(0, 3);
+                year = Integer.parseInt(monthName.substring(3));
+                final Calendar cal = Calendar.getInstance();
+                cal.setTime(new SimpleDateFormat("MMM").parse(monthStr));
+                month = cal.get(Calendar.MONTH) + 1;
 
+            }
+
+            getMonthEntryResponse.getMonthData().addAll(repo.getAllMonthEntries(month,year));
+            getMonthEntryResponse.setSuccess(true);
+
+        } catch (final Exception e) {
+            getMonthEntryResponse.setSuccess(false);
+            getMonthEntryResponse.setErrorMessage("Error occured in "+e.getMessage());
+            return getMonthEntryResponse;
+        }
+
+        return getMonthEntryResponse;
+    }
+
+}

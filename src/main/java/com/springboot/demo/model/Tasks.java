@@ -6,10 +6,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="tasks")
-public class JournalEntry {
+public class Tasks {
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int taskId;
 	private String taskName;
 	private String taskDescription;

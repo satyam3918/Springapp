@@ -6,7 +6,7 @@ public class JournalEntryResponse {
 
     private String errorMessage;
 
-    private JournalEntry data = new JournalEntry();
+    private Tasks data = new Tasks();
 
     public boolean isSuccess() {
         return this.success;
@@ -24,11 +24,11 @@ public class JournalEntryResponse {
         this.errorMessage = errorMessage;
     }
 
-    public JournalEntry getData() {
+    public Tasks getData() {
         return this.data;
     }
 
-    public void setData(JournalEntry data) {
+    public void setData(Tasks data) {
         this.data = data;
     }
 
