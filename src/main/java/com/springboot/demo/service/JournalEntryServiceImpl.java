@@ -46,10 +46,10 @@ public class JournalEntryServiceImpl implements JournalEntryService{
     }
 
     @Override
-    public GetMonthEntryResponse getAllCurrentEntriesWithName(final String taskName) {
+    public GetMonthEntryResponse getAllCurrentEntriesWithTaskName(final String taskName) {
         GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
         try {
-            getMonthEntryResponse.getMonthData().addAll(repo.getAllCurrentEntriesWithName(taskName));
+            getMonthEntryResponse.getMonthData().addAll(repo.getAllCurrentEntriesWithTaskName(taskName));
             getMonthEntryResponse.setSuccess(true);
         } catch (final Exception e) {
             getMonthEntryResponse.setSuccess(false);
@@ -71,10 +71,6 @@ public class JournalEntryServiceImpl implements JournalEntryService{
                 year=now.getYear();
             }
             else{
-                // String monthStr = monthName.split("-")[0];
-                // String yearStr = monthName.split("-")[1];
-                // month=1;
-                // year=2023;
                 final String monthStr = monthName.substring(0, 3);
                 year = Integer.parseInt(monthName.substring(3));
                 final Calendar cal = Calendar.getInstance();

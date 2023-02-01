@@ -51,7 +51,7 @@ public class JournalEntryControllerTest {
         createJournalEntryRequest.setTaskName("Task Name");
         createJournalEntryRequest.setTaskDescription("Task Description");
         String content = (new ObjectMapper()).writeValueAsString(createJournalEntryRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/addEntry")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/addEntry")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         MockMvcBuilders.standaloneSetup(this.journalEntryController)
@@ -87,7 +87,7 @@ public class JournalEntryControllerTest {
         createJournalEntryRequest.setTaskName("Task Name");
         createJournalEntryRequest.setTaskDescription("Task Description");
         String content = (new ObjectMapper()).writeValueAsString(createJournalEntryRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/addEntry")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/addEntry")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.journalEntryController)
@@ -102,14 +102,14 @@ public class JournalEntryControllerTest {
                                         + ",\"updatedBy\":\"2020-03-01\",\"createdTs\":[1,1,1,1,1],\"updatedTs\":[1,1,1,1,1]}}"));
     }
     @Test
-    public void testGetAllCurrentEntriesWithNamewithError() throws Exception {
+    public void testGetAllCurrentEntriesWithTaskNamewithError() throws Exception {
         GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
         getMonthEntryResponse.setErrorMessage("An error occurred");
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
-        when(this.journalEntryService.getAllCurrentEntriesWithName((String) any())).thenReturn(getMonthEntryResponse);
+        when(this.journalEntryService.getAllCurrentEntriesWithTaskName((String) any())).thenReturn(getMonthEntryResponse);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/getAllCurrentEntriesWithName/{taskName}", "Task Name");
+                .get("/api/v1/getAllCurrentEntriesWithTaskName/{taskName}", "Task Name");
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
                 .perform(requestBuilder);
@@ -119,14 +119,14 @@ public class JournalEntryControllerTest {
                         .string("{\"success\":true,\"errorMessage\":\"An error occurred\",\"monthData\":[]}"));
     }
     @Test
-    public void testGetAllCurrentEntriesWithNamewithSuccess() throws Exception {
+    public void testGetAllCurrentEntriesWithTaskNamewithSuccess() throws Exception {
         GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
         getMonthEntryResponse.setErrorMessage(null);
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
-        when(this.journalEntryService.getAllCurrentEntriesWithName((String) any())).thenReturn(getMonthEntryResponse);
+        when(this.journalEntryService.getAllCurrentEntriesWithTaskName((String) any())).thenReturn(getMonthEntryResponse);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-                .get("/getAllCurrentEntriesWithName/{taskName}", "Task Name");
+                .get("/api/v1/getAllCurrentEntriesWithTaskName/{taskName}", "Task Name");
         MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
                 .perform(requestBuilder)
@@ -141,7 +141,7 @@ public class JournalEntryControllerTest {
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
         when(this.journalEntryService.getAllMonthEntries((String) any())).thenReturn(getMonthEntryResponse);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/getAllCurrentEntries");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/getAllCurrentEntries");
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
                 .perform(requestBuilder);
@@ -157,7 +157,7 @@ public class JournalEntryControllerTest {
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
         when(this.journalEntryService.getAllMonthEntries((String) any())).thenReturn(getMonthEntryResponse);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/getAllMonthEntries/{monthName}",
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/getAllMonthEntries/{monthName}",
                 "Month Name");
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
@@ -174,7 +174,7 @@ public class JournalEntryControllerTest {
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
         when(this.journalEntryService.getAllMonthEntries((String) any())).thenReturn(getMonthEntryResponse);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/getAllMonthEntries/{monthName}",
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/getAllMonthEntries/{monthName}",
                 "Month Name");
         MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
@@ -190,7 +190,7 @@ public class JournalEntryControllerTest {
         getMonthEntryResponse.setmonthdata(new ArrayList<>());
         getMonthEntryResponse.setSuccess(true);
         when(this.journalEntryService.getAllMonthEntries((String) any())).thenReturn(getMonthEntryResponse);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/getAllCurrentEntries");
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/getAllCurrentEntries");
         MockMvcBuilders.standaloneSetup(this.journalEntryController)
                 .build()
                 .perform(requestBuilder)
@@ -206,7 +206,7 @@ public class JournalEntryControllerTest {
         createJournalEntryRequest.setTaskName("Task Name");
         createJournalEntryRequest.setTaskDescription("Task Description");
         String content = (new ObjectMapper()).writeValueAsString(createJournalEntryRequest);
-        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/addEntry", "Uri Vars")
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/addEntry", "Uri Vars")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content);
         ResultActions actualPerformResult = MockMvcBuilders.standaloneSetup(this.journalEntryController)

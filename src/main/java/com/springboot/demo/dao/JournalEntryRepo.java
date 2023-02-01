@@ -12,7 +12,7 @@ import com.springboot.demo.model.Tasks;
 public interface JournalEntryRepo extends JpaRepository<Tasks, Integer> {
 
     @Query("select t from Tasks t where MONTH(task_date) = MONTH(curdate()) and YEAR(task_date) = YEAR(curdate()) and task_name =:taskName")
-    public List<Tasks> getAllCurrentEntriesWithName(String taskName);
+    public List<Tasks> getAllCurrentEntriesWithTaskName(String taskName);
 
 
     @Query("select t from Tasks t where MONTH(task_date) = :month and YEAR(task_date) = :year ")

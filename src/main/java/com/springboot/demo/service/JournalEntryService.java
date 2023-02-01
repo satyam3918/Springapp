@@ -12,7 +12,7 @@ public interface JournalEntryService {
 
     JournalEntryResponse addJournalEntry(final CreateJournalEntryRequest createJournalEntryRequest) throws IOException;
 
-    GetMonthEntryResponse getAllCurrentEntriesWithName(final String taskName);
+    GetMonthEntryResponse getAllCurrentEntriesWithTaskName(final String taskName);
 
     GetMonthEntryResponse getAllMonthEntries(final String monthName);
 
