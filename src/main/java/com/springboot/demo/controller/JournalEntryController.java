@@ -91,7 +91,7 @@ public class JournalEntryController {
 			@ApiResponse(responseCode = "500", description = "Bad Request"),
 			@ApiResponse(responseCode = "404", description = "Not found") })
 	@RequestMapping(value = "/getAllMonthEntries/{monthName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<GetMonthEntryResponse> getAllMonthEntries(
+	public ResponseEntity<GetMonthEntryResponse> getAllMonthEntrieswithName(
 			@PathVariable final String monthName) throws IOException {
 		GetMonthEntryResponse getMonthEntryResponse = new GetMonthEntryResponse();
 
