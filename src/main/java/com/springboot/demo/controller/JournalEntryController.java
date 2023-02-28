@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.springboot.demo.model.CreateJournalEntryRequest;
 import com.springboot.demo.model.GetMonthEntryResponse;
@@ -34,6 +35,7 @@ public class JournalEntryController {
 	JournalEntryService journalEntryService;
 
 	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Bad Request"),
 			@ApiResponse(responseCode = "404", description = "Not found") })
@@ -55,6 +57,7 @@ public class JournalEntryController {
 	}
 
 	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Bad Request"),
 			@ApiResponse(responseCode = "404", description = "Not found") })
@@ -75,6 +78,7 @@ public class JournalEntryController {
 	}
 
 	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Bad Request"),
 			@ApiResponse(responseCode = "404", description = "Not found") })
@@ -95,6 +99,7 @@ public class JournalEntryController {
 	}
 
 	@ResponseBody
+	@CrossOrigin(origins = "http://localhost:4200")
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "OK"),
 			@ApiResponse(responseCode = "500", description = "Bad Request"),
 			@ApiResponse(responseCode = "404", description = "Not found") })
